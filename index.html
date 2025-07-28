@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sishu Mangal Parsat - Golden Jubilee Memento</title>
+    <!-- Google Fonts for aesthetic typography -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Lora:ital,wght@0,400..700;1,400..700&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <!-- Tailwind CSS CDN for styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Custom Tailwind configuration for specific colors */
+        @tailwind base;
+        @tailwind components;
+        @tailwind utilities;
+
+        /* Define custom colors for beige, gold, dark gold, and a pretty maroon */
+        :root {
+            --color-beige-200: #F5F5DC; /* A light beige */
+            --color-gold-500: #FFD700; /* Standard gold */
+            --color-gold-300: #FFEA00; /* Lighter gold for gradient */
+            --color-gold-700: #DAA520; /* Darker gold for text (dark golden) */
+            --color-maroon-700: #800000; /* A pretty maroon for "Sishu Mangal Parsat" text */
+            --color-light-gold-bg: #FFFACD; /* Light gold for the 1975-2025 box */
+        }
+
+        .bg-beige-200 { background-color: var(--color-beige-200); }
+        .border-gold-500 { border-color: var(--color-gold-500); }
+        .from-gold-500 { --tw-gradient-from: var(--color-gold-500) var(--tw-gradient-stops); }
+        .via-gold-300 { --tw-gradient-via: var(--color-gold-300) var(--tw-gradient-stops); }
+        .to-gold-500 { --tw-gradient-to: var(--color-gold-500) var(--tw-gradient-stops); }
+        .text-gold-700 { color: var(--color-gold-700); } /* Custom class for dark golden */
+        .text-maroon-700 { color: var(--color-maroon-700); } /* Custom class for pretty maroon */
+        .bg-light-gold-bg { background-color: var(--color-light-gold-bg); }
+
+
+        /* Custom fonts for a more aesthetic look */
+        body {
+            font-family: 'Inter', sans-serif; /* Default font for UI elements */
+            background-color: #f0f0f0; /* Light gray background for the page */
+            display: flex;
+            justify-content: center;
+            align-items: flex-start; /* Align to start to allow scrolling if content is long */
+            min-height: 100vh; /* Minimum height for full viewport */
+            padding: 2rem; /* Padding around the entire content */
+            box-sizing: border-box;
+        }
+
+        /* Specific styles for the memento text to ensure ample space and classic feel */
+        .memento-text {
+            font-family: 'Lora', serif; /* A classic serif font for the memento content */
+            line-height: 2.0; /* Adjusted line height for better spacing with new honorary text */
+            font-size: 1.25rem; /* Base font size */
+        }
+
+        /* Style for the main title within the memento */
+        .memento-title-main {
+            font-family: 'Playfair Display', serif; /* Elegant font for the main title */
+            font-weight: 700; /* Bold */
+            font-size: 2.2rem; /* Reduced font size for subtlety */
+            letter-spacing: 0.08em; /* Slightly reduced letter spacing */
+        }
+        .memento-subtitle {
+            font-family: 'Lora', serif; /* Subtitle font */
+            font-style: italic;
+            font-size: 1rem;
+            color: #555; /* Slightly darker grey for readability */
+        }
+        .memento-section-title {
+            font-family: 'Lora', serif; /* For "Certificate of Recognition" */
+            font-weight: 600; /* Semi-bold */
+            font-size: 1.15rem;
+            margin-top: 2rem; /* Space above this section */
+        }
+
+        /* Style for the input fields and button */
+        .input-group {
+            @apply mb-4;
+        }
+        .input-group label {
+            @apply block text-gray-700 text-sm font-bold mb-2;
+        }
+        .input-group input {
+            @apply shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline;
+        }
+        .btn-primary {
+            @apply bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline transition duration-300 ease-in-out;
+        }
+
+        /* Hide the input section when printing */
+        @media print {
+            .input-section-container {
+                display: none;
+            }
+            body {
+                padding: 0; /* Remove padding for print */
+                margin: 0; /* Remove margin for print */
+                display: block; /* Allow normal flow for printing */
+                background-color: white; /* White background for print */
+            }
+            .memento-container {
+                box-shadow: none !important; /* Remove shadow for print */
+                border: none !important; /* Remove outer border for print if desired */
+                width: 100% !important; /* Ensure full width on print */
+                max-width: none !important; /* Remove max-width for print */
+            }
+            /* Adjust margins/paddings for print if needed */
+            .memento-container .p-8 { padding: 2rem !important; }
+            .memento-container .p-6 { padding: 1.5rem !important; }
+        }
+    </style>
+    <!-- html2pdf.js CDN for PDF generation -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+</head>
+<body class="bg-gray-100 p-8 flex flex-col items-center">
+
+    <!-- Input Section -->
+    <div class="input-section-container bg-white p-8 rounded-xl shadow-lg mb-8 w-full max-w-md">
+        <h2 class="text-2xl font-bold text-center mb-6 text-gray-800">Generate Memento</h2>
+        <div class="input-group">
+            <label for="schoolNameInput">School Name:</label>
+            <input type="text" id="schoolNameInput" placeholder="Enter school name" class="focus:ring-blue-500 focus:border-blue-500">
+        </div>
+        <div class="input-group">
+            <label for="joiningYearInput">Joining Year:</label>
+            <input type="number" id="joiningYearInput" placeholder="e.g., 1995" min="1900" max="2025" class="focus:ring-blue-500 focus:border-blue-500">
+        </div>
+        <button id="generatePdfBtn" class="btn-primary w-full">Generate Memento PDF</button>
+    </div>
+
+    <!-- Memento Display Area - This content will be converted to PDF -->
+    <div id="mementoFrame" class="memento-container bg-beige-200 p-4 rounded-xl shadow-2xl w-full max-w-3xl">
+        <div class="border-4 border-gold-500 p-8 rounded-lg">
+            <div class="bg-white p-6 rounded-md text-center">
+                <!-- Golden Jubilee Title Section (matches image) -->
+                <div class="mb-8">
+                    <p class="memento-title-main text-gold-700 mb-2 leading-tight">GOLDEN JUBILEE</p>
+                    <p class="memento-title-main text-black mb-1 leading-tight">SISHU MANGAL PARSAT</p>
+                    <p class="memento-subtitle mb-6">Celebrating 50 Years of Educational Excellence</p>
+
+                    <!-- 1975 - 2025 Box -->
+                    <div class="inline-block bg-light-gold-bg text-gold-700 px-6 py-2 rounded-full text-lg font-bold mb-8">
+                        1975 - 2025
+                    </div>
+
+                    <p class="memento-section-title text-maroon-700 italic mb-2">Certificate of Recognition & Appreciation</p>
+                    <p class="memento-text text-black mb-6">This is to certify and acknowledge with profound respect</p>
+                </div>
+
+                <!-- Aesthetic Vinetrail (kept from previous version) -->
+                <div class="w-3/4 h-0.5 bg-gradient-to-r from-gold-500 via-gold-300 to-gold-500 rounded-full my-8 mx-auto"></div>
+
+                <!-- Main Memento Text -->
+                <div class="memento-text text-gray-800 px-4">
+                    <!-- School Name Placeholder (kept as input-driven underline) -->
+                    <p class="mb-6">
+                        <span id="schoolNamePlaceholder" class="border-b border-black px-8 pb-1 text-gold-700 inline-block min-w-[200px]">_________________________________</span>
+                    </p>
+                    <p>for being an integral part of <span class="text-maroon-700">Sishu Mangal Parsat</span> from <span id="joiningYearPlaceholder" class="border-b border-black px-8 pb-1 inline-block min-w-[80px]">________</span> to 2025</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Get references to input fields and the button
+        const schoolNameInput = document.getElementById('schoolNameInput');
+        const joiningYearInput = document.getElementById('joiningYearInput');
+        const generatePdfBtn = document.getElementById('generatePdfBtn');
+
+        // Get references to the placeholders in the memento
+        const schoolNamePlaceholder = document.getElementById('schoolNamePlaceholder');
+        const joiningYearPlaceholder = document.getElementById('joiningYearPlaceholder');
+
+        // Get reference to the memento frame div that will be converted to PDF
+        const mementoFrame = document.getElementById('mementoFrame');
+
+        // Add event listener to the button for PDF generation
+        generatePdfBtn.addEventListener('click', () => {
+            // Get the values from the input fields
+            const schoolName = schoolNameInput.value.trim();
+            const joiningYear = joiningYearInput.value.trim();
+
+            // Update the memento placeholders with the input values
+            // If input is empty, revert to underscores for visual clarity
+            schoolNamePlaceholder.textContent = schoolName || '_________________________________';
+            joiningYearPlaceholder.textContent = joiningYear || '________';
+
+            // Ensure the underlines are still visible even if text is short
+            // These min-width styles are applied directly in HTML for initial rendering
+            // but can be dynamically adjusted here if needed for very long inputs.
+            // For now, they are mostly for ensuring the underline appears even with no text.
+            schoolNamePlaceholder.style.minWidth = schoolName ? 'fit-content' : '200px';
+            joiningYearPlaceholder.style.minWidth = joiningYear ? 'fit-content' : '80px';
+
+
+            // Configuration for html2pdf
+            const options = {
+                margin: 0.5, // Margin around the PDF content (inches)
+                filename: `Sishu_Mangal_Parsat_Memento_${schoolName || 'Generic'}.pdf`, // Dynamic filename
+                image: { type: 'jpeg', quality: 0.98 }, // Image quality for rendering HTML elements
+                html2canvas: { scale: 2, logging: true, dpi: 192, letterRendering: true }, // Scale for better resolution
+                jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' } // PDF unit, format, and orientation
+            };
+
+            // Generate the PDF from the mementoFrame div
+            html2pdf().from(mementoFrame).set(options).save();
+        });
+    </script>
+</body>
+</html>
