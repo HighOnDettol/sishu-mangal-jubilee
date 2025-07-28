@@ -122,6 +122,10 @@
             <input type="text" id="schoolNameInput" placeholder="Enter school name" class="focus:ring-blue-500 focus:border-blue-500">
         </div>
         <div class="input-group">
+            <label for="addressInput">Address:</label>
+            <input type="text" id="addressInput" placeholder="Enter school address" class="focus:ring-blue-500 focus:border-blue-500">
+        </div>
+        <div class="input-group">
             <label for="joiningYearInput">Joining Year:</label>
             <input type="number" id="joiningYearInput" placeholder="e.g., 1995" min="1900" max="2025" class="focus:ring-blue-500 focus:border-blue-500">
         </div>
@@ -152,9 +156,12 @@
 
                 <!-- Main Memento Text -->
                 <div class="memento-text text-gray-800 px-4">
-                    <!-- School Name Placeholder (kept as input-driven underline) -->
-                    <p class="mb-6">
+                    <!-- School Name and Address Placeholder -->
+                    <p class="mb-0">
                         <span id="schoolNamePlaceholder" class="border-b border-black px-8 pb-1 text-gold-700 inline-block min-w-[200px]">_________________________________</span>
+                    </p>
+                    <p class="mb-6 text-sm">
+                        <span id="addressPlaceholder" class="border-b border-black px-4 pb-1 inline-block min-w-[300px] min-h-[40px] flex items-center justify-center text-center">____________________</span>
                     </p>
                     <p>for being an integral part of <span class="text-maroon-700">Sishu Mangal Parsat</span> from <span id="joiningYearPlaceholder" class="border-b border-black px-8 pb-1 inline-block min-w-[80px]">________</span> to 2025</p>
                 </div>
@@ -165,11 +172,13 @@
     <script>
         // Get references to input fields and the button
         const schoolNameInput = document.getElementById('schoolNameInput');
+        const addressInput = document.getElementById('addressInput'); // New address input
         const joiningYearInput = document.getElementById('joiningYearInput');
         const generatePdfBtn = document.getElementById('generatePdfBtn');
 
         // Get references to the placeholders in the memento
         const schoolNamePlaceholder = document.getElementById('schoolNamePlaceholder');
+        const addressPlaceholder = document.getElementById('addressPlaceholder'); // New address placeholder
         const joiningYearPlaceholder = document.getElementById('joiningYearPlaceholder');
 
         // Get reference to the memento frame div that will be converted to PDF
@@ -179,18 +188,18 @@
         generatePdfBtn.addEventListener('click', () => {
             // Get the values from the input fields
             const schoolName = schoolNameInput.value.trim();
+            const address = addressInput.value.trim(); // Get address value
             const joiningYear = joiningYearInput.value.trim();
 
             // Update the memento placeholders with the input values
-            // If input is empty, revert to underscores for visual clarity
             schoolNamePlaceholder.textContent = schoolName || '_________________________________';
+            addressPlaceholder.textContent = address || '____________________'; // Update address placeholder
             joiningYearPlaceholder.textContent = joiningYear || '________';
 
             // Ensure the underlines are still visible even if text is short
-            // These min-width styles are applied directly in HTML for initial rendering
-            // but can be dynamically adjusted here if needed for very long inputs.
-            // For now, they are mostly for ensuring the underline appears even with no text.
             schoolNamePlaceholder.style.minWidth = schoolName ? 'fit-content' : '200px';
+            addressPlaceholder.style.minWidth = address ? 'fit-content' : '300px'; // Increased min-width for address
+            addressPlaceholder.style.minHeight = address ? 'auto' : '40px'; // Ensure min-height for two lines
             joiningYearPlaceholder.style.minWidth = joiningYear ? 'fit-content' : '80px';
 
 
@@ -200,7 +209,7 @@
                 filename: `Sishu_Mangal_Parsat_Memento_${schoolName || 'Generic'}.pdf`, // Dynamic filename
                 image: { type: 'jpeg', quality: 0.98 }, // Image quality for rendering HTML elements
                 html2canvas: { scale: 2, logging: true, dpi: 192, letterRendering: true }, // Scale for better resolution
-                jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' } // PDF unit, format, and orientation
+                jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' } // Changed back to portrait
             };
 
             // Generate the PDF from the mementoFrame div
