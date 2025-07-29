@@ -108,6 +108,22 @@
             @apply bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline transition duration-300 ease-in-out;
         }
 
+        /* Watermark styling */
+        .watermark {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: url('https://i.pinimg.com/736x/5d/dd/aa/5dddaa9e301eb987426db8009517af59.jpg'); /* Your logo URL */
+            background-repeat: no-repeat;
+            background-position: center center;
+            background-size: 70%; /* Adjust size as needed, e.g., 50%, 70%, contain */
+            opacity: 0.1; /* Adjust opacity for watermark effect */
+            z-index: 0; /* Ensure it's behind content */
+            pointer-events: none; /* Allow interaction with content above */
+        }
+
         /* Hide the input section when printing */
         @media print {
             .input-section-container {
@@ -160,15 +176,11 @@
     <div id="mementoFrame" class="memento-container bg-beige-200 p-6 rounded-xl shadow-2xl w-full max-w-2xl">
         <div class="border-4 border-gold-main p-8 rounded-lg">
             <div class="bg-white p-6 rounded-md text-center relative shadow-md">
-
-                <!-- Logo (top-left) -->
-                <div class="absolute top-4 left-4">
-                    <!-- Updated logo URL -->
-                    <img src="https://i.pinimg.com/736x/5d/dd/aa/5dddaa9e301eb987426db8009517af59.jpg" alt="Sishu Mangal Parsat Logo" class="w-16 h-16 object-contain">
-                </div>
+                <!-- Watermark Layer -->
+                <div class="watermark"></div>
 
                 <!-- Golden Jubilee Title Section (top-center) -->
-                <div class="mb-8 pt-4">
+                <div class="mb-8 pt-4 relative z-10"> <!-- Added relative z-10 -->
                     <p class="memento-title-main text-gold-main mb-2 leading-tight">GOLDEN JUBILEE</p>
                     <p class="memento-title-main text-black mb-1 leading-tight">SISHU MANGAL PARSAT</p>
                     <p class="memento-subtitle mb-6">Celebrating 50 Years of Educational Excellence</p>
@@ -183,10 +195,10 @@
                 </div>
 
                 <!-- Aesthetic Vinetrail -->
-                <div class="w-3/4 h-0.5 bg-gradient-to-r from-gold-main via-gold-light to-gold-main rounded-full my-8 mx-auto"></div>
+                <div class="w-3/4 h-0.5 bg-gradient-to-r from-gold-main via-gold-light to-gold-main rounded-full my-8 mx-auto relative z-10"></div> <!-- Added relative z-10 -->
 
                 <!-- Main Memento Text -->
-                <div class="memento-text text-gray-800 px-4">
+                <div class="memento-text text-gray-800 px-4 relative z-10"> <!-- Added relative z-10 -->
                     <!-- School Name and Address Placeholder -->
                     <p class="mb-6">
                         <span id="schoolNamePlaceholder" class="text-gold-light inline-block border-b border-black pb-1"></span>,
@@ -196,7 +208,7 @@
                 </div>
 
                 <!-- Signature Section -->
-                <div class="mt-12 flex justify-center items-end w-full gap-x-24 pb-4"> <!-- Changed justify-around to justify-center and added gap-x-24 -->
+                <div class="mt-12 flex justify-center items-end w-full gap-x-24 pb-4 relative z-10"> <!-- Added relative z-10 -->
                     <div class="text-left">
                         <p class="signature-name">Manoka Paul Chowdhury</p>
                         <p class="signature-detail">Vice President</p>
