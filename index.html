@@ -77,17 +77,18 @@
         /* Signature name style (less cursive, more elegant script) */
         .signature-name {
             font-family: 'Great Vibes', cursive; /* Elegant, less aggressive cursive font for names */
-            font-size: 1.6rem; /* Adjusted font size for names */
+            font-size: 1.5rem; /* Slightly reduced font size */
             font-weight: 400; /* Lighter weight for a more natural signature feel */
             line-height: 1.2; /* Tighter line height for the name itself */
-            margin-bottom: 0.25rem; /* Small space below name */
+            white-space: nowrap; /* Prevent text wrapping */
         }
 
         /* Signature title/org style */
         .signature-detail {
             font-family: 'Playfair Display', serif; /* Using Playfair Display for titles/org */
-            font-size: 0.8rem; /* Adjusted font size for details */
+            font-size: 0.75rem; /* Slightly reduced font size */
             line-height: 1.2; /* Tighter line height */
+            white-space: nowrap; /* Prevent text wrapping */
         }
 
         /* Style for the input fields and button */
@@ -102,6 +103,9 @@
         }
         .btn-primary {
             @apply bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline transition duration-300 ease-in-out;
+        }
+        .btn-secondary {
+            @apply bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline transition duration-300 ease-in-out;
         }
 
         /* Hide the input section when printing */
@@ -128,6 +132,8 @@
     </style>
     <!-- html2pdf.js CDN for PDF generation -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <!-- html2canvas.js CDN for image generation -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 </head>
 <body class="bg-gray-100 p-8 flex flex-col items-center">
 
@@ -146,17 +152,18 @@
             <label for="joiningYearInput">Joining Year:</label>
             <input type="number" id="joiningYearInput" placeholder="e.g., 1995" min="1900" max="2025" class="focus:ring-blue-500 focus:border-blue-500">
         </div>
-        <button id="generatePdfBtn" class="btn-primary w-full">Generate Memento PDF</button>
+        <button id="generatePdfBtn" class="btn-primary w-full mb-2">Generate Memento PDF</button>
+        <button id="downloadImageBtn" class="btn-secondary w-full">Download Memento as Image</button>
     </div>
 
     <!-- Memento Display Area - This content will be converted to PDF -->
-    <div id="mementoFrame" class="memento-container bg-beige-200 p-4 rounded-xl shadow-2xl w-full max-w-2xl">
+    <div id="mementoFrame" class="memento-container bg-beige-200 p-6 rounded-xl shadow-2xl w-full max-w-2xl">
         <div class="border-4 border-gold-main p-8 rounded-lg">
-            <div class="bg-white p-6 rounded-md text-center relative">
+            <div class="bg-white p-6 rounded-md text-center relative shadow-md">
 
                 <!-- Logo (top-left) -->
                 <div class="absolute top-4 left-4">
-                    <!-- Using the contentFetchId for the uploaded logo -->
+                    <!-- Updated logo URL -->
                     <img src="https://i.pinimg.com/736x/5d/dd/aa/5dddaa9e301eb987426db8009517af59.jpg" alt="Sishu Mangal Parsat Logo" class="w-16 h-16 object-contain">
                 </div>
 
@@ -189,13 +196,13 @@
                 </div>
 
                 <!-- Signature Section -->
-                <div class="mt-12 flex justify-around items-end w-full px-32 pb-4">
-                    <div class="text-center">
+                <div class="mt-12 flex justify-center items-end w-full gap-x-24 pb-4"> <!-- Changed justify-around to justify-center and added gap-x-24 -->
+                    <div class="text-left">
                         <p class="signature-name">Manoka Paul Chowdhury</p>
                         <p class="signature-detail">Vice President</p>
                         <p class="signature-detail">Sishu Mangal Parsat.</p>
                     </div>
-                    <div class="text-center">
+                    <div class="text-left">
                         <p class="signature-name">Pallab Kanti Saha</p>
                         <p class="signature-detail">Secretary</p>
                         <p class="signature-detail">Sishu Mangal Parsat.</p>
@@ -211,6 +218,7 @@
         const addressInput = document.getElementById('addressInput');
         const joiningYearInput = document.getElementById('joiningYearInput');
         const generatePdfBtn = document.getElementById('generatePdfBtn');
+        const downloadImageBtn = document.getElementById('downloadImageBtn'); // New button reference
 
         // Get references to the placeholders in the memento
         const schoolNamePlaceholder = document.getElementById('schoolNamePlaceholder');
@@ -240,6 +248,34 @@
 
             // Generate the PDF from the mementoFrame div
             html2pdf().from(mementoFrame).set(options).save();
+        });
+
+        // Add event listener for image download
+        downloadImageBtn.addEventListener('click', () => {
+            const schoolName = schoolNameInput.value.trim();
+            const address = addressInput.value.trim();
+            const joiningYear = joiningYearInput.value.trim();
+
+            // Update the memento placeholders with the input values
+            schoolNamePlaceholder.textContent = schoolName;
+            addressPlaceholder.textContent = address;
+            joiningYearPlaceholder.textContent = joiningYear;
+
+            // Use html2canvas to capture the mementoFrame
+            html2canvas(mementoFrame, { scale: 2 }).then(canvas => {
+                const imageUrl = canvas.toDataURL('image/png'); // Get image data as PNG
+
+                // Create a temporary link element to trigger download
+                const link = document.createElement('a');
+                link.href = imageUrl;
+                link.download = `Sishu_Mangal_Parsat_Memento_${schoolName || 'Generic'}.png`;
+                document.body.appendChild(link); // Append to body to make it clickable
+                link.click(); // Programmatically click the link
+                document.body.removeChild(link); // Clean up
+            }).catch(error => {
+                console.error('Error generating image:', error);
+                // You might want to show a user-friendly message here
+            });
         });
     </script>
 </body>
