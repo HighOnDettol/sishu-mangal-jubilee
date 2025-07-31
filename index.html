@@ -39,8 +39,9 @@
             font-family: 'Inter', sans-serif; /* Default font for UI elements */
             background-color: #f0f0f0; /* Light gray background for the page */
             display: flex;
-            justify-content: center;
-            align-items: flex-start; /* Align to start to allow scrolling if content is long */
+            flex-direction: column; /* Changed to column to stack input and memento */
+            justify-content: flex-start; /* Align to start */
+            align-items: center;
             min-height: 100vh; /* Minimum height for full viewport */
             padding: 2rem; /* Padding around the entire content */
             box-sizing: border-box;
@@ -136,26 +137,73 @@
             z-index: 1;
         }
 
-        /* Hide the input section when printing */
+        /* A4 Page Styling */
+        .memento-container {
+            width: 210mm; /* A4 width */
+            height: 297mm; /* A4 height */
+            max-width: none; /* Override max-width for A4 */
+            box-sizing: border-box; /* Include padding and border in the element's total width and height */
+            display: flex; /* Use flexbox for centering content */
+            justify-content: center; /* Center horizontally */
+            align-items: center; /* Center vertically */
+            padding: 0; /* Remove default padding, inner div will handle it */
+        }
+
+        .memento-inner-border {
+            border: 4mm solid var(--color-gold-main); /* Border in mm */
+            padding: 20mm; /* Inner padding for content in mm */
+            width: calc(100% - 8mm); /* Full width minus border */
+            height: calc(100% - 8mm); /* Full height minus border */
+            box-sizing: border-box;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .memento-content-area {
+            background-color: white;
+            padding: 20mm; /* Further inner padding for content in mm */
+            border-radius: 0.25rem; /* Tailwind's rounded-md */
+            text-align: center;
+            position: relative;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); /* Tailwind's shadow-md */
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between; /* Distribute space between elements */
+        }
+
+        /* Adjustments for print */
         @media print {
             .input-section-container {
-                display: none;
+                display: none !important;
             }
             body {
-                padding: 0; /* Remove padding for print */
-                margin: 0; /* Remove margin for print */
-                display: block; /* Allow normal flow for printing */
-                background-color: white; /* White background for print */
+                padding: 0 !important;
+                margin: 0 !important;
+                display: block !important;
+                background-color: white !important;
             }
             .memento-container {
-                box-shadow: none !important; /* Remove shadow for print */
-                border: none !important; /* Remove outer border for print if desired */
-                width: 100% !important; /* Ensure full width on print */
-                max-width: none !important; /* Remove max-width for print */
+                box-shadow: none !important;
+                border: none !important;
+                width: 210mm !important;
+                height: 297mm !important;
+                max-width: none !important;
+                padding: 0 !important;
+                margin: 0 !important;
             }
-            /* Adjust margins/paddings for print if needed */
-            .memento-container .p-8 { padding: 2rem !important; }
-            .memento-container .p-6 { padding: 1.5rem !important; }
+            .memento-inner-border {
+                border: 4mm solid var(--color-gold-main) !important;
+                padding: 20mm !important;
+                width: calc(100% - 8mm) !important;
+                height: calc(100% - 8mm) !important;
+            }
+            .memento-content-area {
+                box-shadow: none !important;
+                padding: 20mm !important;
+            }
         }
     </style>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
@@ -181,9 +229,9 @@
         <button id="downloadImageBtn" class="btn-secondary w-full">Download Memento as Image</button>
     </div>
 
-    <div id="mementoFrame" class="memento-container bg-beige-200 p-6 rounded-xl shadow-2xl w-full max-w-2xl">
-        <div class="border-4 border-gold-main p-8 rounded-lg">
-            <div class="bg-white p-6 rounded-md text-center relative shadow-md">
+    <div id="mementoFrame" class="memento-container bg-beige-200 rounded-xl shadow-2xl">
+        <div class="memento-inner-border bg-beige-200 rounded-lg">
+            <div class="memento-content-area">
                 <div class="watermark-img-container">
                     <img src="https://highondettol.github.io/sishu-mangal-jubilee/logo.jpg"
                          alt="Sishu Mangal Parsat Logo Watermark"
@@ -191,8 +239,8 @@
                          onerror="this.style.display='none'; console.error('Watermark image failed to load. Check URL.');">
                 </div>
 
-                <div class="content-layer">
-                    <div class="mb-8 pt-4">
+                <div class="content-layer flex flex-col justify-between h-full">
+                    <div class="mb-auto pt-4">
                         <p class="memento-title-main text-gold-main mb-2 leading-tight">GOLDEN JUBILEE</p>
                         <p class="memento-title-main text-black mb-1 leading-tight">Sishu Mangal Parsat</p>
                         <p class="memento-subtitle mb-6">Celebrating 50 Years of Educational Excellence</p>
@@ -201,12 +249,13 @@
                             1975 - 2025
                         </div>
 
-                        <p class="memento-section-title text-maroon-700 italic mb-0">Certificate of Recognition & Appreciation</p> <p class="memento-text text-black mt-2 mb-0" style="font-size: 1.1rem; white-space: nowrap;">This is to certify and acknowledge with profound respect</p>
+                        <p class="memento-section-title text-maroon-700 italic mb-0">Certificate of Recognition & Appreciation</p>
+                        <p class="memento-text text-black mt-2 mb-0" style="font-size: 1.1rem; white-space: nowrap;">This is to certify and acknowledge with profound respect</p>
                     </div>
 
                     <div class="w-3/4 h-0.5 bg-gradient-to-r from-gold-main via-gold-light to-gold-main rounded-full my-8 mx-auto"></div>
 
-                    <div class="memento-text text-gray-800 px-4">
+                    <div class="memento-text text-gray-800 px-4 mb-auto">
                         <p class="mb-2">
                             <span id="schoolNamePlaceholder" class="text-gold-light inline-block border-b border-black pb-1"></span>
                         </p>
@@ -246,25 +295,24 @@
         const addressPlaceholder = document.getElementById('addressPlaceholder');
         const joiningYearPlaceholder = document.getElementById('joiningYearPlaceholder');
 
+        // Function to update memento content
+        function updateMementoContent() {
+            schoolNamePlaceholder.textContent = schoolNameInput.value.trim();
+            addressPlaceholder.textContent = addressInput.value.trim();
+            joiningYearPlaceholder.textContent = joiningYearInput.value.trim();
+        }
+
         // Add event listener to the button for PDF generation
         generatePdfBtn.addEventListener('click', () => {
-            // Get the values from the input fields
-            const schoolName = schoolNameInput.value.trim();
-            const address = addressInput.value.trim();
-            const joiningYear = joiningYearInput.value.trim();
-
-            // Update the memento placeholders with the input values
-            schoolNamePlaceholder.textContent = schoolName;
-            addressPlaceholder.textContent = address;
-            joiningYearPlaceholder.textContent = joiningYear;
+            updateMementoContent(); // Update content before generating
 
             // Configuration for html2pdf
             const options = {
-                margin: 0.5, // Margin around the PDF content (inches)
-                filename: `Sishu_Mangal_Parsat_Memento_${schoolName || 'Generic'}.pdf`, // Dynamic filename
+                margin: [0, 0, 0, 0], // No margins, as the container is already A4 sized
+                filename: `Sishu_Mangal_Parsat_Memento_${schoolNameInput.value.trim() || 'Generic'}.pdf`, // Dynamic filename
                 image: { type: 'jpeg', quality: 0.98 }, // Image quality for rendering HTML elements
                 html2canvas: { scale: 2, logging: true, dpi: 192, letterRendering: true }, // Scale for better resolution
-                jsPDF: { unit: 'in', format: 'a4', orientation: 'portrait' } // Changed to A4 portrait
+                jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' } // A4 portrait, unit in mm
             };
 
             // Generate the PDF from the mementoFrame div
@@ -273,14 +321,7 @@
 
         // Add event listener for image download
         downloadImageBtn.addEventListener('click', () => {
-            const schoolName = schoolNameInput.value.trim();
-            const address = addressInput.value.trim();
-            const joiningYear = joiningYearInput.value.trim();
-
-            // Update the memento placeholders with the input values
-            schoolNamePlaceholder.textContent = schoolName;
-            addressPlaceholder.textContent = address;
-            joiningYearPlaceholder.textContent = joiningYear;
+            updateMementoContent(); // Update content before generating
 
             // Use html2canvas to capture the mementoFrame
             html2canvas(mementoFrame, { scale: 2 }).then(canvas => {
@@ -289,7 +330,7 @@
                 // Create a temporary link element to trigger download
                 const link = document.createElement('a');
                 link.href = imageUrl;
-                link.download = `Sishu_Mangal_Parsat_Memento_${schoolName || 'Generic'}.png`;
+                link.download = `Sishu_Mangal_Parsat_Memento_${schoolNameInput.value.trim() || 'Generic'}.png`;
                 document.body.appendChild(link); // Append to body to make it clickable
                 link.click(); // Programmatically click the link
                 document.body.removeChild(link); // Clean up
