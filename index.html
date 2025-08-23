@@ -7,11 +7,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Lora:ital,wght@0,400..700;1,400..700&family=Inter:wght@400;600;700&family=Great+Vibes&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        /* Custom Tailwind configuration for specific colors */
-        @tailwind base;
-        @tailwind components;
-        @tailwind utilities;
-
         :root {
             --color-beige-200: #F5F5DC;
             --color-gold-main: #B8860B;
@@ -22,7 +17,6 @@
             --color-red-golden-accent: #A52A2A;
             --color-dark-maroon: #5C0000;
         }
-
         .bg-beige-200 { background-color: var(--color-beige-200); }
         .border-gold-main { border-color: var(--color-gold-main); }
         .from-gold-main { --tw-gradient-from: var(--color-gold-main) var(--tw-gradient-stops); }
@@ -38,13 +32,21 @@
         body {
             font-family: 'Inter', sans-serif;
             background-color: #f0f0f0;
+            min-height: 100vh;
+            min-width: 100vw;
+            margin: 0;
+            padding: 0;
             display: flex;
             flex-direction: column;
-            justify-content: flex-start;
             align-items: center;
-            min-height: 100vh;
-            padding: 2rem;
-            box-sizing: border-box;
+            justify-content: flex-start;
+        }
+        .center-a4-wrap {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100vw;
+            height: calc(100vh - 32px); /* 32px for header/input margin */
         }
         .memento-text {
             font-family: 'Lora', serif;
@@ -82,11 +84,13 @@
             line-height: 1.2;
             white-space: nowrap;
         }
-        .input-group { @apply mb-4; }
-        .input-group label { @apply block text-gray-700 text-sm font-bold mb-2; }
-        .input-group input { @apply shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline; }
-        .btn-primary { @apply bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline transition duration-300 ease-in-out; }
-        .btn-secondary { @apply bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline transition duration-300 ease-in-out; }
+        .input-group { margin-bottom: 1rem; }
+        .input-group label { display: block; color: #4B5563; font-size: 0.875rem; font-weight: bold; margin-bottom: 0.5rem; }
+        .input-group input { box-shadow: 0 1px 3px rgba(0,0,0,.1); border: 1px solid #E5E7EB; border-radius: 0.5rem; width: 100%; padding: 0.5rem 0.75rem; color: #374151; }
+        .btn-primary { background: #3B82F6; color: #fff; font-weight: bold; padding: 0.5rem 1rem; border-radius: 0.5rem; margin-bottom: 0.5rem; width: 100%; cursor: pointer; border: none; transition: background 0.2s;}
+        .btn-primary:hover { background: #2563EB;}
+        .btn-secondary { background: #6B7280; color: #fff; font-weight: bold; padding: 0.5rem 1rem; border-radius: 0.5rem; width: 100%; cursor: pointer; border: none; transition: background 0.2s;}
+        .btn-secondary:hover { background: #374151;}
         .watermark-img-container {
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -109,9 +113,11 @@
             z-index: 1;
         }
         .memento-container {
+            background-color: var(--color-beige-200);
             width: 210mm;
             height: 297mm;
-            max-width: none;
+            max-width: 100vw;
+            max-height: 100vh;
             box-sizing: border-box;
             display: flex;
             justify-content: center;
@@ -149,6 +155,14 @@
                 display: block !important;
                 background-color: white !important;
             }
+            .center-a4-wrap {
+                width: 100vw !important;
+                height: 100vh !important;
+                margin: 0 !important;
+                padding: 0 !important;
+                justify-content: center !important;
+                align-items: center !important;
+            }
             .memento-container {
                 box-shadow: none !important;
                 border: none !important;
@@ -156,7 +170,10 @@
                 height: 297mm !important;
                 max-width: none !important;
                 padding: 0 !important;
-                margin: 0 !important;
+                margin: 0 auto !important;
+                display: flex !important;
+                justify-content: center !important;
+                align-items: center !important;
             }
             .memento-inner-border {
                 border: 4mm solid var(--color-gold-main) !important;
@@ -173,100 +190,89 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 </head>
-<body class="bg-gray-100 p-8 flex flex-col items-center">
-
-    <div class="input-section-container bg-white p-8 rounded-xl shadow-lg mb-8 w-full max-w-md">
+<body>
+    <div class="input-section-container bg-white p-8 rounded-xl shadow-lg mb-8 w-full max-w-md" style="z-index:2;">
         <h2 class="text-2xl font-bold text-center mb-6 text-gray-800">Generate Memento</h2>
         <div class="input-group">
             <label for="schoolNameInput">School Name:</label>
-            <input type="text" id="schoolNameInput" placeholder="Enter school name" class="focus:ring-blue-500 focus:border-blue-500">
+            <input type="text" id="schoolNameInput" placeholder="Enter school name">
         </div>
         <div class="input-group">
             <label for="addressInput">Address:</label>
-            <input type="text" id="addressInput" placeholder="Enter school address" class="focus:ring-blue-500 focus:border-blue-500">
+            <input type="text" id="addressInput" placeholder="Enter school address">
         </div>
         <div class="input-group">
             <label for="joiningYearInput">Joining Year:</label>
-            <input type="number" id="joiningYearInput" placeholder="e.g., 1995" min="1900" max="2025" class="focus:ring-blue-500 focus:border-blue-500">
+            <input type="number" id="joiningYearInput" placeholder="e.g., 1995" min="1900" max="2025">
         </div>
-        <button id="generatePdfBtn" class="btn-primary w-full mb-2">Generate Memento PDF</button>
-        <button id="downloadImageBtn" class="btn-secondary w-full">Download Memento as Image</button>
+        <button id="generatePdfBtn" class="btn-primary">Generate Memento PDF</button>
+        <button id="downloadImageBtn" class="btn-secondary">Download Memento as Image</button>
     </div>
-
-    <div id="mementoFrame" class="memento-container bg-beige-200 rounded-xl shadow-2xl">
-        <div class="memento-inner-border bg-beige-200 rounded-lg">
-            <div class="memento-content-area">
-                <div class="watermark-img-container">
-                    <img src="https://highondettol.github.io/sishu-mangal-jubilee/logo.jpg"
-                         alt="Sishu Mangal Parsat Logo Watermark"
-                         class="watermark-img"
-                         onerror="this.style.display='none'; console.error('Watermark image failed to load. Check URL.');">
-                </div>
-                <div class="content-layer flex flex-col justify-between h-full">
-                    <div class="mb-auto pt-4">
-                        <p class="memento-title-main text-gold-main mb-2 leading-tight">GOLDEN JUBILEE</p>
-                        <p class="memento-title-main text-black mb-1 leading-tight">Sishu Mangal Parsat</p>
-                        <p class="memento-subtitle mb-6">Celebrating 50 Years of Educational Excellence</p>
-                        
-                        <div class="inline-block bg-light-gold-bg text-gold-main px-6 py-2 rounded-full text-lg font-bold mb-2">
-                            1975 - 2025
-                        </div>
-                        <!-- Registration detail line, safely inside white box -->
-                        <div class="text-xs text-gray-700 mb-8" style="margin-top: -0.75rem;">
-                            (Registered under the West Bengal Societies Registration Act, 1961 - No. S/17073/1975-76)
-                        </div>
-                        <p class="memento-section-title text-maroon-700 italic mb-0">Certificate of Recognition & Appreciation</p>
-                        <p class="memento-text text-black mt-2 mb-0" style="font-size: 1.1rem; white-space: nowrap;">This is to certify and acknowledge with profound respect</p>
+    <div class="center-a4-wrap">
+        <div id="mementoFrame" class="memento-container rounded-xl shadow-2xl">
+            <div class="memento-inner-border rounded-lg">
+                <div class="memento-content-area">
+                    <div class="watermark-img-container">
+                        <img src="https://highondettol.github.io/sishu-mangal-jubilee/logo.jpg"
+                             alt="Sishu Mangal Parsat Logo Watermark"
+                             class="watermark-img"
+                             onerror="this.style.display='none'; console.error('Watermark image failed to load. Check URL.');">
                     </div>
-
-                    <div class="w-3/4 h-0.5 bg-gradient-to-r from-gold-main via-gold-light to-gold-main rounded-full my-8 mx-auto"></div>
-
-                    <div class="memento-text text-gray-800 px-4 mb-auto">
-                        <p class="mb-2">
-                            <span id="schoolNamePlaceholder" class="text-red-golden-accent inline-block border-b border-black pb-1"></span>
-                        </p>
-                        <p class="mb-6 text-sm">
-                            <span id="addressPlaceholder" class="text-dark-maroon inline-block"></span>
-                        </p>
-                        <p>for being an integral part of <span class="text-maroon-700">Sishu Mangal Parsat</span> from <span id="joiningYearPlaceholder" class="inline-block border-b border-black pb-1"></span> to Present</p>
-                    </div>
-
-                    <div class="mt-12 flex justify-center items-end w-full gap-x-24 pb-4">
-                        <div class="text-left">
-                            <p class="signature-name">Menoka Paul Chowdhury</p>
-                            <p class="signature-detail">Vice President</p>
-                            <p class="signature-detail">Sishu Mangal Parsat.</p>
+                    <div class="content-layer flex flex-col justify-between h-full">
+                        <div class="mb-auto pt-4">
+                            <p class="memento-title-main text-gold-main mb-2 leading-tight">GOLDEN JUBILEE</p>
+                            <p class="memento-title-main text-black mb-1 leading-tight">Sishu Mangal Parsat</p>
+                            <p class="memento-subtitle mb-6">Celebrating 50 Years of Educational Excellence</p>
+                            <div class="inline-block bg-light-gold-bg text-gold-main px-6 py-2 rounded-full text-lg font-bold mb-2">
+                                1975 - 2025
+                            </div>
+                            <div class="text-xs text-gray-700 mb-8" style="margin-top:-0.75rem;">
+                                (Registered under the West Bengal Societies Registration Act, 1961 - No. S/17073/1975-76)
+                            </div>
+                            <p class="memento-section-title text-maroon-700 italic mb-0">Certificate of Recognition & Appreciation</p>
+                            <p class="memento-text text-black mt-2 mb-0" style="font-size: 1.1rem; white-space: nowrap;">This is to certify and acknowledge with profound respect</p>
                         </div>
-                        <div class="text-left">
-                            <p class="signature-name">Pallab Kanti Saha</p>
-                            <p class="signature-detail">Secretary</p>
-                            <p class="signature-detail">Sishu Mangal Parsat.</p>
+                        <div class="w-3/4 h-0.5 bg-gradient-to-r from-gold-main via-gold-light to-gold-main rounded-full my-8 mx-auto"></div>
+                        <div class="memento-text text-gray-800 px-4 mb-auto">
+                            <p class="mb-2">
+                                <span id="schoolNamePlaceholder" class="text-red-golden-accent inline-block border-b border-black pb-1"></span>
+                            </p>
+                            <p class="mb-6 text-sm">
+                                <span id="addressPlaceholder" class="text-dark-maroon inline-block"></span>
+                            </p>
+                            <p>for being an integral part of <span class="text-maroon-700">Sishu Mangal Parsat</span> from <span id="joiningYearPlaceholder" class="inline-block border-b border-black pb-1"></span> to Present</p>
+                        </div>
+                        <div class="mt-12 flex justify-center items-end w-full gap-x-24 pb-4">
+                            <div class="text-left">
+                                <p class="signature-name">Menoka Paul Chowdhury</p>
+                                <p class="signature-detail">Vice President</p>
+                                <p class="signature-detail">Sishu Mangal Parsat.</p>
+                            </div>
+                            <div class="text-left">
+                                <p class="signature-name">Pallab Kanti Saha</p>
+                                <p class="signature-detail">Secretary</p>
+                                <p class="signature-detail">Sishu Mangal Parsat.</p>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
     <script>
-        // Get references to input fields and the button
         const schoolNameInput = document.getElementById('schoolNameInput');
         const addressInput = document.getElementById('addressInput');
         const joiningYearInput = document.getElementById('joiningYearInput');
         const generatePdfBtn = document.getElementById('generatePdfBtn');
         const downloadImageBtn = document.getElementById('downloadImageBtn');
-        // Get references to the placeholders in the memento
         const schoolNamePlaceholder = document.getElementById('schoolNamePlaceholder');
         const addressPlaceholder = document.getElementById('addressPlaceholder');
         const joiningYearPlaceholder = document.getElementById('joiningYearPlaceholder');
-
-        // Function to update memento content
         function updateMementoContent() {
             schoolNamePlaceholder.textContent = schoolNameInput.value.trim();
             addressPlaceholder.textContent = addressInput.value.trim();
             joiningYearPlaceholder.textContent = joiningYearInput.value.trim();
         }
-        // PDF generation
         generatePdfBtn.addEventListener('click', () => {
             updateMementoContent();
             const options = {
@@ -278,7 +284,6 @@
             };
             html2pdf().from(mementoFrame).set(options).save();
         });
-        // Image download
         downloadImageBtn.addEventListener('click', () => {
             updateMementoContent();
             html2canvas(mementoFrame, { scale: 2 }).then(canvas => {
