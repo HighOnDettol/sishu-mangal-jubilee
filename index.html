@@ -208,6 +208,12 @@
                 padding: 20mm !important;
             }
         }
+        
+        /* New style for the registration line to shift it left */
+        .registration-line {
+            transform: translateX(-2.5%); /* Adjust this value to shift left or right */
+        }
+
     </style>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
@@ -251,7 +257,7 @@
                         <div class="inline-block bg-light-gold-bg text-gold-main px-6 py-2 rounded-full text-lg font-bold mb-2">
                             1975 - 2025
                         </div>
-                        <p class="memento-subtitle mb-6" style="font-size: 0.85rem; white-space: nowrap;">
+                        <p class="memento-subtitle mb-6 registration-line" style="font-size: 0.85rem; white-space: nowrap;">
                           Registered under the West Bengal Societies Registration Act, 1961 - No. S/17073/1975-76
                         </p>
 
