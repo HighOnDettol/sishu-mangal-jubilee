@@ -109,8 +109,8 @@
             z-index: 1;
         }
         .memento-container {
-            width: 210mm;
-            height: 297mm;
+            width: 190mm; /* Reduced from 210mm by 2cm */
+            height: 277mm; /* Reduced from 297mm by 2cm */
             max-width: none;
             box-sizing: border-box;
             display: flex;
@@ -152,8 +152,8 @@
             .memento-container {
                 box-shadow: none !important;
                 border: none !important;
-                width: 210mm !important;
-                height: 297mm !important;
+                width: 190mm !important; /* Adjusted for print */
+                height: 277mm !important; /* Adjusted for print */
                 max-width: none !important;
                 padding: 0 !important;
                 margin: 0 !important;
@@ -198,9 +198,9 @@
             <div class="memento-content-area">
                 <div class="watermark-img-container">
                     <img src="https://highondettol.github.io/sishu-mangal-jubilee/logo.jpg"
-                         alt="Sishu Mangal Parsat Logo Watermark"
-                         class="watermark-img"
-                         onerror="this.style.display='none'; console.error('Watermark image failed to load. Check URL.');">
+                            alt="Sishu Mangal Parsat Logo Watermark"
+                            class="watermark-img"
+                            onerror="this.style.display='none'; console.error('Watermark image failed to load. Check URL.');">
                 </div>
                 <div class="content-layer flex flex-col justify-between h-full">
                     <div class="mb-auto pt-4">
@@ -211,7 +211,6 @@
                         <div class="inline-block bg-light-gold-bg text-gold-main px-6 py-2 rounded-full text-lg font-bold mb-2">
                             1975 - 2025
                         </div>
-                        <!-- Registration detail line, safely inside white box -->
                         <div class="text-xs text-gray-700 mb-8" style="margin-top: -0.75rem;">
                             (Society Registration No. S/17073/1975-76)
                         </div>
@@ -274,7 +273,7 @@
                 filename: `Sishu_Mangal_Parsat_Memento_${schoolNameInput.value.trim() || 'Generic'}.pdf`,
                 image: { type: 'jpeg', quality: 0.98 },
                 html2canvas: { scale: 2, logging: true, dpi: 192, letterRendering: true },
-                jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+                jsPDF: { unit: 'mm', format: [190, 277], orientation: 'portrait' }
             };
             html2pdf().from(mementoFrame).set(options).save();
         });
