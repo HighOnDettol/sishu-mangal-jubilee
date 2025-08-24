@@ -1,255 +1,298 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sishu Mangal Parsat - Golden Jubilee Memento</title>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Lora:ital,wght@0,400..700;1,400..700&family=Inter:wght@400;600;700&family=Great+Vibes&display=swap" rel="stylesheet">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        /* Custom Tailwind configuration for specific colors */
-        @tailwind base;
-        @tailwind components;
-        @tailwind utilities;
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sishu Mangal Parsat - Golden Jubilee Memento</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Lora:ital,wght@0,400..700;1,400..700&family=Inter:wght@400;600;700&family=Great+Vibes&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+/* Custom Tailwind configuration for specific colors */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-        :root {
-            --color-beige-200: #F5F5DC;
-            --color-gold-main: #B8860B;
-            --color-gold-light: #DAA520;
-            --color-gold-dark: #8B4513;
-            --color-maroon-700: #800000;
-            --color-light-gold-bg: #FDF8E1;
-            --color-red-golden-accent: #A52A2A;
-            --color-dark-maroon: #5C0000;
-        }
+    :root {
+        --color-beige-200: #F5F5DC;
+        --color-gold-main: #B8860B;
+        --color-gold-light: #DAA520;
+        --color-gold-dark: #8B4513;
+        --color-maroon-700: #800000;
+        --color-light-gold-bg: #FDF8E1;
+        --color-red-golden-accent: #A52A2A;
+        --color-dark-maroon: #5C0000;
+    }
 
-        .bg-beige-200 { background-color: var(--color-beige-200); }
-        .border-gold-main { border-color: var(--color-gold-main); }
-        .from-gold-main { --tw-gradient-from: var(--color-gold-main) var(--tw-gradient-stops); }
-        .via-gold-light { --tw-gradient-via: var(--color-gold-light) var(--tw-gradient-stops); }
-        .to-gold-main { --tw-gradient-to: var(--color-gold-main) var(--tw-gradient-stops); }
-        .text-gold-main { color: var(--color-gold-main); }
-        .text-gold-light { color: var(--color-gold-light); }
-        .text-maroon-700 { color: var(--color-maroon-700); }
-        .bg-light-gold-bg { background-color: var(--color-light-gold-bg); }
-        .text-red-golden-accent { color: var(--color-red-golden-accent); }
-        .text-dark-maroon { color: var(--color-dark-maroon); }
-        
+    .bg-beige-200 { background-color: var(--color-beige-200); }
+    .border-gold-main { border-color: var(--color-gold-main); }
+    .from-gold-main { --tw-gradient-from: var(--color-gold-main) var(--tw-gradient-stops); }
+    .via-gold-light { --tw-gradient-via: var(--color-gold-light) var(--tw-gradient-stops); }
+    .to-gold-main { --tw-gradient-to: var(--color-gold-main) var(--tw-gradient-stops); }
+    .text-gold-main { color: var(--color-gold-main); }
+    .text-gold-light { color: var(--color-gold-light); }
+    .text-maroon-700 { color: var(--color-maroon-700); }
+    .bg-light-gold-bg { background-color: var(--color-light-gold-bg); }
+    .text-red-golden-accent { color: var(--color-red-golden-accent); }
+    .text-dark-maroon { color: var(--color-dark-maroon); }
+
+    body {
+        font-family: 'Inter', sans-serif;
+        background-color: #f0f0f0;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        min-height: 100vh;
+        padding: 2rem;
+        box-sizing: border-box;
+    }
+    .memento-text {
+        font-family: 'Lora', serif;
+        line-height: 2.0;
+        font-size: 1.25rem;
+    }
+    .memento-title-main {
+        font-family: 'Playfair Display', serif;
+        font-weight: 700;
+        font-size: 2.2rem;
+        letter-spacing: 0.08em;
+    }
+    .memento-subtitle {
+        font-family: 'Lora', serif;
+        font-style: italic;
+        font-size: 1rem;
+        color: #555;
+    }
+    .memento-section-title {
+        font-family: 'Lora', serif;
+        font-weight: 600;
+        font-size: 1.15rem;
+        margin-top: 2rem;
+    }
+    .signature-name {
+        font-family: 'Great Vibes', cursive;
+        font-size: 1.5rem;
+        font-weight: 400;
+        line-height: 1.2;
+        white-space: nowrap;
+    }
+    .signature-detail {
+        font-family: 'Playfair Display', serif;
+        font-size: 0.75rem;
+        line-height: 1.2;
+        white-space: nowrap;
+    }
+    .input-group { @apply mb-4; }
+    .input-group label { @apply block text-gray-700 text-sm font-bold mb-2; }
+    .input-group input { @apply shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline; }
+    .btn-primary { @apply bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline transition duration-300 ease-in-out; }
+    .btn-secondary { @apply bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline transition duration-300 ease-in-out; }
+    .watermark-img-container {
+        position: absolute;
+        top: 0; left: 0; width: 100%; height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 0;
+        pointer-events: none;
+    }
+    .watermark-img {
+        width: 70%;
+        height: auto;
+        opacity: 0.1;
+        object-fit: contain;
+        transform: translateZ(0);
+        -webkit-transform: translateZ(0);
+    }
+    .content-layer {
+        position: relative;
+        z-index: 1;
+    }
+    .memento-container {
+        width: calc(210mm - 10mm); /* Reduced by 10mm in width */
+        height: calc(297mm - 10mm); /* Reduced by 10mm in height */
+        max-width: none;
+        box-sizing: border-box;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 0;
+    }
+    .memento-inner-border {
+        border: 4mm solid var(--color-gold-main);
+        padding: 20mm;
+        width: calc(100% - 8mm);
+        height: calc(100% - 8mm);
+        box-sizing: border-box;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .memento-content-area {
+        background-color: white;
+        padding: 20mm;
+        border-radius: 0.25rem;
+        text-align: center;
+        position: relative;
+        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+    @media print {
+        .input-section-container { display: none !important; }
         body {
-            font-family: 'Inter', sans-serif;
-            background-color: #f0f0f0;
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-start;
-            align-items: center;
-            min-height: 100vh;
-            padding: 2rem;
-            box-sizing: border-box;
+            padding: 0 !important;
+            margin: 0 !important;
+            display: block !important;
+            background-color: white !important;
         }
-        
-        .memento-text { font-family: 'Lora', serif; line-height: 2.0; font-size: 1.25rem; }
-        .memento-title-main { font-family: 'Playfair Display', serif; font-weight: 700; font-size: 2.2rem; letter-spacing: 0.08em; }
-        .memento-subtitle { font-family: 'Lora', serif; font-style: italic; font-size: 1rem; color: #555; }
-        .memento-section-title { font-family: 'Lora', serif; font-weight: 600; font-size: 1.15rem; margin-top: 2rem; }
-        .signature-name { font-family: 'Great Vibes', cursive; font-size: 1.5rem; font-weight: 400; line-height: 1.2; white-space: nowrap; }
-        .signature-detail { font-family: 'Playfair Display', serif; font-size: 0.75rem; line-height: 1.2; white-space: nowrap; }
-        .input-group { @apply mb-4; }
-        .input-group label { @apply block text-gray-700 text-sm font-bold mb-2; }
-        .input-group input { @apply shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline; }
-        .btn-primary { @apply bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline transition duration-300 ease-in-out; }
-        .btn-secondary { @apply bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline transition duration-300 ease-in-out; }
-        .watermark-img-container { position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; justify-content: center; align-items: center; z-index: 0; pointer-events: none; }
-        .watermark-img { width: 70%; height: auto; opacity: 0.1; object-fit: contain; transform: translateZ(0); -webkit-transform: translateZ(0); }
-        .content-layer { position: relative; z-index: 1; }
-        
-        /* Default memento styles for screen preview */
         .memento-container {
-            width: 210mm;
-            height: 297mm;
-            max-width: none;
-            box-sizing: border-box;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 0;
+            box-shadow: none !important;
+            border: none !important;
+            width: 200mm !important; /* Reduced width for print */
+            height: 287mm !important; /* Reduced height for print */
+            max-width: none !important;
+            padding: 0 !important;
+            margin: 5mm auto !important; /* Add 5mm margin on top and bottom, auto for horizontal centering */
         }
         .memento-inner-border {
-            border: 4mm solid var(--color-gold-main);
-            padding: 20mm;
-            width: calc(100% - 8mm);
-            height: calc(100% - 8mm);
-            box-sizing: border-box;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            border: 4mm solid var(--color-gold-main) !important;
+            padding: 20mm !important;
+            width: calc(100% - 8mm) !important;
+            height: calc(100% - 8mm) !important;
         }
         .memento-content-area {
-            background-color: white;
-            padding: 20mm;
-            border-radius: 0.25rem;
-            text-align: center;
-            position: relative;
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-            width: 100%;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
+            box-shadow: none !important;
+            padding: 20mm !important;
         }
-        
-        /* PRINT STYLES - MODIFIED TO REDUCE AREA BY 5MM ON EACH SIDE */
-        @media print {
-            .input-section-container { display: none !important; }
-            body { 
-                padding: 0 !important; 
-                margin: 0 !important; 
-                display: block !important; 
-                background-color: white !important;
-            }
-            .memento-container { 
-                box-shadow: none !important; 
-                border: none !important; 
-                /* New dimensions to fit within A4 with 5mm margin */
-                width: 200mm !important; /* 210mm - 10mm */
-                height: 287mm !important; /* 297mm - 10mm */
-                max-width: none !important; 
-                padding: 0 !important; 
-                margin: 5mm auto !important; /* 5mm top/bottom, centered left/right */
-            }
-            .memento-inner-border { 
-                border: 4mm solid var(--color-gold-main) !important;
-                /* Padding reduced to compensate for smaller container */
-                padding: 15mm !important; 
-                width: calc(100% - 8mm) !important;
-                height: calc(100% - 8mm) !important;
-            }
-            .memento-content-area { 
-                box-shadow: none !important; 
-                padding: 20mm !important;
-            }
-        }
-    </style>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    }
+</style>
+<script src="[https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js](https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js)"></script>
+<script src="[https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js](https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js)"></script>
 </head>
 <body class="bg-gray-100 p-8 flex flex-col items-center">
-    
-    <div class="input-section-container bg-white p-8 rounded-xl shadow-lg mb-8 w-full max-w-md">
-        <h2 class="text-2xl font-bold text-center mb-6 text-gray-800">Generate Memento</h2>
-        <div class="input-group">
-            <label for="schoolNameInput">School Name:</label>
-            <input type="text" id="schoolNameInput" placeholder="Enter school name" class="focus:ring-blue-500 focus:border-blue-500">
-        </div>
-        <div class="input-group">
-            <label for="addressInput">Address:</label>
-            <input type="text" id="addressInput" placeholder="Enter school address" class="focus:ring-blue-500 focus:border-blue-500">
-        </div>
-        <div class="input-group">
-            <label for="joiningYearInput">Joining Year:</label>
-            <input type="number" id="joiningYearInput" placeholder="e.g., 1995" min="1900" max="2025" class="focus:ring-blue-500 focus:border-blue-500">
-        </div>
-        <button id="generatePdfBtn" class="btn-primary w-full mb-2">Generate Memento PDF</button>
-        <button id="downloadImageBtn" class="btn-secondary w-full">Download Memento as Image</button>
+
+<div class="input-section-container bg-white p-8 rounded-xl shadow-lg mb-8 w-full max-w-md">
+    <h2 class="text-2xl font-bold text-center mb-6 text-gray-800">Generate Memento</h2>
+    <div class="input-group">
+        <label for="schoolNameInput">School Name:</label>
+        <input type="text" id="schoolNameInput" placeholder="Enter school name" class="focus:ring-blue-500 focus:border-blue-500">
     </div>
+    <div class="input-group">
+        <label for="addressInput">Address:</label>
+        <input type="text" id="addressInput" placeholder="Enter school address" class="focus:ring-blue-500 focus:border-blue-500">
+    </div>
+    <div class="input-group">
+        <label for="joiningYearInput">Joining Year:</label>
+        <input type="number" id="joiningYearInput" placeholder="e.g., 1995" min="1900" max="2025" class="focus:ring-blue-500 focus:border-blue-500">
+    </div>
+    <button id="generatePdfBtn" class="btn-primary w-full mb-2">Generate Memento PDF</button>
+    <button id="downloadImageBtn" class="btn-secondary w-full">Download Memento as Image</button>
+</div>
 
-    <div id="mementoFrame" class="memento-container bg-beige-200 rounded-xl shadow-2xl">
-        <div class="memento-inner-border bg-beige-200 rounded-lg">
-            <div class="memento-content-area">
-                <div class="watermark-img-container">
-                    <img src="https://highondettol.github.io/sishu-mangal-jubilee/logo.jpg" alt="Sishu Mangal Parsat Logo Watermark" class="watermark-img" onerror="this.style.display='none'; console.error('Watermark image failed to load. Check URL.');">
+<div id="mementoFrame" class="memento-container bg-beige-200 rounded-xl shadow-2xl">
+    <div class="memento-inner-border bg-beige-200 rounded-lg">
+        <div class="memento-content-area">
+            <div class="watermark-img-container">
+                <img src="[https://highondettol.github.io/sishu-mangal-jubilee/logo.jpg](https://highondettol.github.io/sishu-mangal-jubilee/logo.jpg)"
+                     alt="Sishu Mangal Parsat Logo Watermark"
+                     class="watermark-img"
+                     onerror="this.style.display='none'; console.error('Watermark image failed to load. Check URL.');">
+            </div>
+            <div class="content-layer flex flex-col justify-between h-full">
+                <div class="mb-auto pt-4">
+                    <p class="memento-title-main text-gold-main mb-2 leading-tight">GOLDEN JUBILEE</p>
+                    <p class="memento-title-main text-black mb-1 leading-tight">Sishu Mangal Parsat</p>
+                    <p class="memento-subtitle mb-6">Celebrating 50 Years of Educational Excellence</p>
+
+                    <div class="inline-block bg-light-gold-bg text-gold-main px-6 py-2 rounded-full text-lg font-bold mb-2">
+                        1975 - 2025
+                    </div>
+                    <div class="text-xs text-gray-700 mb-8" style="margin-top: -0.75rem;">
+                        (Society Registration No. S/17073/1975-76)
+                    </div>
+                    <p class="memento-section-title text-maroon-700 italic mb-0">Certificate of Recognition & Appreciation</p>
+                    <p class="memento-text text-black mt-2 mb-0" style="font-size: 1.1rem; white-space: nowrap;">This is to certify and acknowledge with profound respect</p>
                 </div>
-                <div class="content-layer flex flex-col justify-between h-full">
-                    <div class="mb-auto pt-4">
-                        <p class="memento-title-main text-gold-main mb-2 leading-tight">GOLDEN JUBILEE</p>
-                        <p class="memento-title-main text-black mb-1 leading-tight">Sishu Mangal Parsat</p>
-                        <p class="memento-subtitle mb-6">Celebrating 50 Years of Educational Excellence</p>
-                        <div class="inline-block bg-light-gold-bg text-gold-main px-6 py-2 rounded-full text-lg font-bold mb-2">
-                            1975 - 2025
-                        </div>
-                        <div class="text-xs text-gray-700 mb-8" style="margin-top: -0.75rem;">
-                            (Society Registration No. S/17073/1975-76)
-                        </div>
-                        <p class="memento-section-title text-maroon-700 italic mb-0">Certificate of Recognition & Appreciation</p>
-                        <p class="memento-text text-black mt-2 mb-0" style="font-size: 1.1rem; white-space: nowrap;">This is to certify and acknowledge with profound respect</p>
-                    </div>
-                    
-                    <div class="w-3/4 h-0.5 bg-gradient-to-r from-gold-main via-gold-light to-gold-main rounded-full my-8 mx-auto"></div>
-                    
-                    <div class="memento-text text-gray-800 px-4 mb-auto">
-                        <p class="mb-2">
-                            <span id="schoolNamePlaceholder" class="text-red-golden-accent inline-block border-b border-black pb-1"></span>
-                        </p>
-                        <p class="mb-6 text-sm">
-                            <span id="addressPlaceholder" class="text-dark-maroon inline-block"></span>
-                        </p>
-                        <p>for being an integral part of <span class="text-maroon-700">Sishu Mangal Parsat</span> from <span id="joiningYearPlaceholder" class="inline-block border-b border-black pb-1"></span> to Present</p>
-                    </div>
 
-                    <div class="mt-12 flex justify-center items-end w-full gap-x-24 pb-4">
-                        <div class="text-left">
-                            <p class="signature-name">Menoka Paul Chowdhury</p>
-                            <p class="signature-detail">Vice President</p>
-                            <p class="signature-detail">Sishu Mangal Parsat.</p>
-                        </div>
-                        <div class="text-left">
-                            <p class="signature-name">Pallab Kanti Saha</p>
-                            <p class="signature-detail">Secretary</p>
-                            <p class="signature-detail">Sishu Mangal Parsat.</p>
-                        </div>
+                <div class="w-3/4 h-0.5 bg-gradient-to-r from-gold-main via-gold-light to-gold-main rounded-full my-8 mx-auto"></div>
+
+                <div class="memento-text text-gray-800 px-4 mb-auto">
+                    <p class="mb-2">
+                        <span id="schoolNamePlaceholder" class="text-red-golden-accent inline-block border-b border-black pb-1"></span>
+                    </p>
+                    <p class="mb-6 text-sm">
+                        <span id="addressPlaceholder" class="text-dark-maroon inline-block"></span>
+                    </p>
+                    <p>for being an integral part of <span class="text-maroon-700">Sishu Mangal Parsat</span> from <span id="joiningYearPlaceholder" class="inline-block border-b border-black pb-1"></span> to Present</p>
+                </div>
+
+                <div class="mt-12 flex justify-center items-end w-full gap-x-24 pb-4">
+                    <div class="text-left">
+                        <p class="signature-name">Menoka Paul Chowdhury</p>
+                        <p class="signature-detail">Vice President</p>
+                        <p class="signature-detail">Sishu Mangal Parsat.</p>
+                    </div>
+                    <div class="text-left">
+                        <p class="signature-name">Pallab Kanti Saha</p>
+                        <p class="signature-detail">Secretary</p>
+                        <p class="signature-detail">Sishu Mangal Parsat.</p>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    
-    <script>
-        // Get references to input fields and the button
-        const schoolNameInput = document.getElementById('schoolNameInput');
-        const addressInput = document.getElementById('addressInput');
-        const joiningYearInput = document.getElementById('joiningYearInput');
-        const generatePdfBtn = document.getElementById('generatePdfBtn');
-        const downloadImageBtn = document.getElementById('downloadImageBtn');
-        
-        // Get references to the placeholders in the memento
-        const schoolNamePlaceholder = document.getElementById('schoolNamePlaceholder');
-        const addressPlaceholder = document.getElementById('addressPlaceholder');
-        const joiningYearPlaceholder = document.getElementById('joiningYearPlaceholder');
-        
-        // Function to update memento content
-        function updateMementoContent() {
-            schoolNamePlaceholder.textContent = schoolNameInput.value.trim();
-            addressPlaceholder.textContent = addressInput.value.trim();
-            joiningYearPlaceholder.textContent = joiningYearInput.value.trim();
-        }
-        
-        // PDF generation
-        generatePdfBtn.addEventListener('click', () => {
-            updateMementoContent();
-            const options = {
-                margin: [0, 0, 0, 0],
-                filename: `Sishu_Mangal_Parsat_Memento_${schoolNameInput.value.trim() || 'Generic'}.pdf`,
-                image: { type: 'jpeg', quality: 0.98 },
-                html2canvas: { scale: 2, logging: true, dpi: 192, letterRendering: true },
-                jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
-            };
-            html2pdf().from(mementoFrame).set(options).save();
-        });
+</div>
 
-        // Image download
-        downloadImageBtn.addEventListener('click', () => {
-            updateMementoContent();
-            html2canvas(mementoFrame, { scale: 2 }).then(canvas => {
-                const imageUrl = canvas.toDataURL('image/png');
-                const link = document.createElement('a');
-                link.href = imageUrl;
-                link.download = `Sishu_Mangal_Parsat_Memento_${schoolNameInput.value.trim() || 'Generic'}.png`;
-                document.body.appendChild(link);
-                link.click();
-                document.body.removeChild(link);
-            }).catch(error => {
-                console.error('Error generating image:', error);
-            });
+<script>
+    // Get references to input fields and the button
+    const schoolNameInput = document.getElementById('schoolNameInput');
+    const addressInput = document.getElementById('addressInput');
+    const joiningYearInput = document.getElementById('joiningYearInput');
+    const generatePdfBtn = document.getElementById('generatePdfBtn');
+    const downloadImageBtn = document.getElementById('downloadImageBtn');
+    // Get references to the placeholders in the memento
+    const schoolNamePlaceholder = document.getElementById('schoolNamePlaceholder');
+    const addressPlaceholder = document.getElementById('addressPlaceholder');
+    const joiningYearPlaceholder = document.getElementById('joiningYearPlaceholder');
+
+    // Function to update memento content
+    function updateMementoContent() {
+        schoolNamePlaceholder.textContent = schoolNameInput.value.trim();
+        addressPlaceholder.textContent = addressInput.value.trim();
+        joiningYearPlaceholder.textContent = joiningYearInput.value.trim();
+    }
+    // PDF generation
+    generatePdfBtn.addEventListener('click', () => {
+        updateMementoContent();
+        const options = {
+            margin: [0, 0, 0, 0],
+            filename: `Sishu_Mangal_Parsat_Memento_${schoolNameInput.value.trim() || 'Generic'}.pdf`,
+            image: { type: 'jpeg', quality: 0.98 },
+            html2canvas: { scale: 2, logging: true, dpi: 192, letterRendering: true },
+            jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+        };
+        html2pdf().from(mementoFrame).set(options).save();
+    });
+    // Image download
+    downloadImageBtn.addEventListener('click', () => {
+        updateMementoContent();
+        html2canvas(mementoFrame, { scale: 2 }).then(canvas => {
+            const imageUrl = canvas.toDataURL('image/png');
+            const link = document.createElement('a');
+            link.href = imageUrl;
+            link.download = `Sishu_Mangal_Parsat_Memento_${schoolNameInput.value.trim() || 'Generic'}.png`;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }).catch(error => {
+            console.error('Error generating image:', error);
         });
-    </script>
+    });
+</script>
 </body>
 </html>
