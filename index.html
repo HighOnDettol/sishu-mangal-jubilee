@@ -108,17 +108,18 @@
             z-index: 1;
         }
 
-        /* ✅ Certificate moved 5mm inward */
+        /* ✅ Certificate fits inside A4 with 5mm margin all around */
         .memento-container {
-            width: 200mm;   /* 210 - (5+5) */
-            height: 287mm;  /* 297 - (5+5) */
-            margin: 5mm;    /* offset all around */
+            width: 200mm;
+            height: 287mm;
+            margin: 5mm auto;
             max-width: none;
             box-sizing: border-box;
             display: flex;
             justify-content: center;
             align-items: center;
             padding: 0;
+            page-break-inside: avoid;
         }
 
         .memento-inner-border {
@@ -155,10 +156,11 @@
             .memento-container {
                 width: 200mm !important;
                 height: 287mm !important;
-                margin: 5mm !important;
+                margin: 5mm auto !important;
                 box-shadow: none !important;
                 border: none !important;
                 padding: 0 !important;
+                page-break-inside: avoid !important;
             }
             .memento-inner-border {
                 border: 4mm solid var(--color-gold-main) !important;
@@ -269,11 +271,12 @@
         generatePdfBtn.addEventListener('click', () => {
             updateMementoContent();
             const options = {
-                margin: [0, 0, 0, 0],
+                margin: 0,
                 filename: `Sishu_Mangal_Parsat_Memento_${schoolNameInput.value.trim() || 'Generic'}.pdf`,
                 image: { type: 'jpeg', quality: 0.98 },
-                html2canvas: { scale: 2, logging: true, dpi: 192, letterRendering: true },
-                jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+                html2canvas: { scale: 2, useCORS: true, backgroundColor: null },
+                jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
+                pagebreak: { mode: ['avoid'] }
             };
             html2pdf().from(mementoFrame).set(options).save();
         });
